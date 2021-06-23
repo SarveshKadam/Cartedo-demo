@@ -11,9 +11,10 @@ dotenv.config({path : './config/dev.env'});
 
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors())
+app.use(cors({origin:["http://localhost:3000"],credentials:true}))
 app.use('/auth',user)
 app.use('/',customer)
+
 //MongoDB Setup
 mongoose.connect(process.env.DATABASE ,{useUnifiedTopology : true , useNewUrlParser : true,useCreateIndex: true})
 

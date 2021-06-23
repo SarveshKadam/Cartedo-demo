@@ -1,17 +1,18 @@
 const jwt = require('jsonwebtoken')
 const User = require('../models/user')
 
+
+
 const auth = async (req,res,next)=>{
    try {
 
-        console.log(req.cookies);
 
         const token = req.cookies.token
         if(!token){
             return res.status(401).json({ errorMessage :"Please authenticate"})
         }
         const decoded = jwt.verify(token,'tryingtoken')
-        console.log(decoded);
+        
         const user = await User.findOne({_id : decoded.id})
         
         if(!user){
